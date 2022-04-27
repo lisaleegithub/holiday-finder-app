@@ -1,95 +1,108 @@
 import { useState } from "react";
 
 const Form = (props) => {
-    // Initial student in case that you want to update a new student
-    const {initialStudent = {id: null, 
-                            firstname: "", 
-                            lastname: ""}} = props;
+    // Initial trip in case that you want to update a new trip
+    const { initialTrip = {
+        id: null, location: "",
+        startdate: "",
+        enddate: ""
+    } } = props;
 
 
-    // We're using that initial student as our initial state                       
-    const [student, setStudent] = useState(initialStudent);
+    // We're using that initial trip as our initial state                       
+    const [trip, setTrip] = useState(initialTrip);
 
-    //create functions that handle the event of the user typing into the form
-    const handleNameChange = (event) => {
-        const firstname = event.target.value;
-        setStudent((student) => ({ ...student, firstname }));
-
+    // create functions that handle the event of the user typing into the form
+    const handleLocationChange = (event) => {
+        const location = event.target.value;
+        setTrip((trip) => ({ ...trip, location }));
     }
 
-    const handleLastnameChange = (event) => {
-        const lastname = event.target.value;
-        setStudent((student) => ({ ...student, lastname }));
-
+    const handleStartDateChange = (event) => {
+        const startdate = event.target.value;
+        setTrip((trip) => ({ ...trip, startdate }));
     }
 
-    //A function to handle the post request
-    const postStudent = (newStudent) => {
-        return fetch('/api/students', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify(newStudent)
-      }).then((response) => {
-          return response.json()
-      }).then((data) => {
-        console.log("From the post ", data);
-        props.saveStudent(data);
-      
-    });
+    const handleEndDateChange = (event) => {
+        const enddate = event.target.value;
+        setTrip((trip) => ({ ...trip, enddate }));
     }
 
-    //a function to handle the Update request
-    const updateStudent = (existingStudent) =>{
-        return fetch(`/api/students/${existingStudent.id}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'}, 
-            body: JSON.stringify(existingStudent)
-          }).then((response) => {
-              return response.json()
-          }).then((data) => {
-            console.log("From put request ", data);
-            props.saveStudent(data);
-          
-        });
+    // //A function to handle the post request
+    // const postTrip = (newTrip) => {
+    //     return fetch('/api/students', {
+    //     method: 'POST',
+    //     headers: {'Content-Type': 'application/json'}, 
+    //     body: JSON.stringify(newStudent)
+    //   }).then((response) => {
+    //       return response.json()
+    //   }).then((data) => {
+    //     console.log("From the post ", data);
+    //     props.saveStudent(data);
+    // });
+    // }
 
-    }
+    // //a function to handle the Update request
+    // const updateStudent = (existingStudent) =>{
+    //     return fetch(`/api/students/${existingStudent.id}`, {
+    //         method: 'PUT',
+    //         headers: {'Content-Type': 'application/json'}, 
+    //         body: JSON.stringify(existingStudent)
+    //       }).then((response) => {
+    //           return response.json()
+    //       }).then((data) => {
+    //         console.log("From put request ", data);
+    //         props.saveStudent(data);
+    //     });
+    // }
 
-    // Than handle submit function now needs the logic for the update scenario 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(student.id){
-            updateStudent(student);
-        } else {
-            postStudent(student);
-        } 
-        
-    };
+    // // Than handle submit function now needs the logic for the update scenario 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if(student.id){
+    //         updateStudent(student);
+    //     } else {
+    //         postStudent(student);
+    //     } 
+    // };
 
     return (
         <form onSubmit={handleSubmit}>
             <fieldset>
-                <label>First Name</label>
-                <input
-                    type="text"
-                    id="add-user-name"
-                    placeholder="First Name"
-                    required
-                    value={student.firstname}
-                    onChange={handleNameChange}
 
-                />
-                <label>Last Name</label>
+                {/* maybe a dropdown */}
+                <label>Location</label>
                 <input
                     type="text"
-                    id="add-user-lastname"
-                    placeholder="Last Name"
+                    id="add-location"
+                    placeholder="Enter Country"
                     required
-                    value={student.lastname}
-                    onChange={handleLastnameChange}
+                    value={trip.location}
+                    onChange={handleLocationChange}
+                />
+
+                <label>Start Date</label>
+                <input
+                    type="date"
+                    id="add-startdate"
+                    // placeholder=""
+                    required
+                    value={trip.startdate}
+                    onChange={handleStartDateChange}
+                />
+
+                <label>End Date</label>
+                <input
+                    type="date"
+                    id="add-enddate"
+                    // placeholder=""
+                    required
+                    value={trip.enddate}
+                    onChange={handleEndDateChange}
                 />
             </fieldset>
-            
-            <button type="submit">{!student.id ? "Add" : "Save"}</button>
+
+            <button type="submit">{!trip.id ? "Add" : "Save"}</button>
         </form>
     );
 };
