@@ -9,18 +9,19 @@ function Students() {
     // New state to check if we are working on editing a student 
     const [editingStudentId, setEditingStudentId] = useState(null);
 
-    const loadStudents = () => {
-        fetch("/api/students")
-            .then((response) => response.json())
-            .then(students => {
-                setStudents(students);
-            })
+    // async function returning promise
+    const loadHolidays = (country, year) => {
+        return fetch(`https://calendarific.com/api/v2/holidays?&api_key=bc565bd81fa7886bfa6025942d302a467d63bded&type=national&country=${country}&year=${year}`)
+        .then((response) => response.json())
+        .then(data => data.response.holidays)
     }
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
-        loadStudents();
+        loadHolidays("US", 2022)
+        .then(response => console.log("this is response", response));
     }, []);
+
 
     // A function to handle the Delete funtionallity
     const onDelete = (student) => {
@@ -84,7 +85,7 @@ function Students() {
                     }}
                     )}
             </ul>
-            <Form saveStudent={addStudent} />
+            {/* <Form saveStudent={addStudent} /> */}
         </div>
     );
 }
