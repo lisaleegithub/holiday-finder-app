@@ -2,9 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
-const db = require('../server/db/db-connection.js'); 
+const db = require('../server/db/db-connection.js');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
+const axios = require('axios').default;
 app.use(express.static(REACT_BUILD_DIR));
 
 const PORT = process.env.PORT || 5000;
@@ -18,25 +19,50 @@ app.get('/', (req, res) => {
 
 // create the get request for users table
 app.get('/api/users', cors(), async (req, res) => {
-    try{
+    try {
         const { rows: users } = await db.query('SELECT * FROM users');
         res.send(users);
-    } catch (e){
+    } catch (e) {
         console.log(e);
-        return res.status(400).json({e});
+        return res.status(400).json({ e });
     }
 });
 
 // create the get request for trips table
 app.get('/api/trips', cors(), async (req, res) => {
-    try{
+    try {
         const { rows: trips } = await db.query('SELECT * FROM trips');
         res.send(trips);
-    } catch (e){
+    } catch (e) {
         console.log(e);
-        return res.status(400).json({e});
+        return res.status(400).json({ e });
     }
 });
+
+// Make the GET request with the country and year (that it's the redirect from the user)
+app.get("/api/holidays", cors(), async (req, res) => {
+    country = req.query.country;
+    year = req.query.year;
+    console.log("this is country", country);
+    console.log("this is year", year);
+    
+    const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=${year}`;
+    try {
+        const requestResult = await axios.get(url);
+        // console.log("data", data)
+
+        // console.log("msg", data.response.holidays)
+
+        // const result = await data.json();
+        // console.log("result", result);
+
+        res.send(requestResult.data);
+    
+    } catch (err) {
+        console.error("Fetch error: ", err);
+    }
+});
+
 
 // //create the POST request
 // app.post('/api/students', cors(), async (req, res) => {
