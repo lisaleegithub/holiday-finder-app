@@ -42,9 +42,11 @@ app.get('/api/trips', cors(), async (req, res) => {
 // Make the GET request with the country and year (that it's the redirect from the user)
 app.get("/api/holidays", cors(), async (req, res) => {
     country = req.query.country;
+    year = req.query.year;
     console.log("this is country", country);
-    // year = req.query.year;
-    const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=2022`;
+    console.log("this is year", year);
+    
+    const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=${year}`;
     try {
         const requestResult = await axios.get(url);
         // console.log("data", data)

@@ -11,9 +11,12 @@ const Trip = () => {
     const getTrip = (e) => {
         e.preventDefault();
         let country = e.target.elements.country.value;
-        console.log("this is country", country);
+        let year = e.target.elements.year.value;
+        console.log("country entered is", country);
+        console.log("year entered is", year);
+        
         // add to request body
-        fetch(`http://localhost:5000/api/holidays?country=${country}`, {
+        fetch(`http://localhost:5000/api/holidays?country=${country}&year=${year}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
