@@ -5,6 +5,7 @@ require('dotenv').config()
 const db = require('../server/db/db-connection.js');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
+const axios = require('axios').default;
 app.use(express.static(REACT_BUILD_DIR));
 
 const PORT = process.env.PORT || 5000;
@@ -40,14 +41,21 @@ app.get('/api/trips', cors(), async (req, res) => {
 
 // Make the GET request with the country and year (that it's the redirect from the user)
 app.get("/api/holidays", cors(), async (req, res) => {
-    city = req.query.country;
-    year = req.query.year;
-    const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=${year}`;
+    country = req.query.country;
+    console.log("this is country", country);
+    // year = req.query.year;
+    const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=2022`;
     try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        res.send(data);
+        const requestResult = await axios.get(url);
+        // console.log("data", data)
+
+        // console.log("msg", data.response.holidays)
+
+        // const result = await data.json();
+        // console.log("result", result);
+
+        res.send(requestResult.data);
+    
     } catch (err) {
         console.error("Fetch error: ", err);
     }
