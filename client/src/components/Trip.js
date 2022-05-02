@@ -16,7 +16,7 @@ const Trip = () => {
         console.log("year entered is", year);
 
         // add to request body
-        fetch(`http://localhost:5000/api/holidays?country=${country}&year=${year}`, {
+        fetch(`/api/holidays?country=${country}&year=${year}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
