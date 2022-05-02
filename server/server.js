@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
 const db = require('../server/db/db-connection.js');
+const { count } = require('console');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 const axios = require('axios').default;
@@ -45,7 +46,7 @@ app.get("/api/holidays", cors(), async (req, res) => {
     year = req.query.year;
     console.log("this is country", country);
     console.log("this is year", year);
-    
+
     const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&year=${year}`;
     try {
         const requestResult = await axios.get(url);
@@ -57,12 +58,22 @@ app.get("/api/holidays", cors(), async (req, res) => {
         // console.log("result", result);
 
         res.send(requestResult.data);
-    
+
     } catch (err) {
         console.error("Fetch error: ", err);
     }
 });
 
+// Make the GET request with the country name and country code
+app.get("/api/countries", cors(), async (req, res) => {
+    const url = `https://calendarific.com/api/v2/countries?api_key=${process.env.API_KEY}`;
+    try {
+        const countriesResult = await axios.get(url);
+        res.send(countriesResult.data);
+    } catch (err) {
+        console.error("Fetch error: ", err);
+    }
+});
 
 // //create the POST request
 // app.post('/api/students', cors(), async (req, res) => {
