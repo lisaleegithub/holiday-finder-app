@@ -14,7 +14,7 @@ const Trip = () => {
         let year = e.target.elements.year.value;
         console.log("country entered is", country);
         console.log("year entered is", year);
-        
+
         // add to request body
         fetch(`http://localhost:5000/api/holidays?country=${country}&year=${year}`, {
             method: "get",
@@ -32,9 +32,9 @@ const Trip = () => {
 
     return (
         <div>
-            <h2>Holidays</h2>
+            <h2>Holiday Finder</h2>
             <TripForm getTrip={getTrip} />
-            {!holidays ? (<p>Please search for your holidays</p>) : (<Holiday days={holidays}/>)}
+            {!holidays ? (<p>Find holidays for your trip!</p>) : (<Holiday days={holidays}/>)}
         </div>
     )
 }
