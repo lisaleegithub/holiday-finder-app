@@ -10,13 +10,15 @@ const Trip = () => {
     // passing a function parent to child
     const getTrip = (e) => {
         e.preventDefault();
+        let dateObj = new Date(e.target.elements.traveldate.value)
         let country = e.target.elements.country.value;
-        let year = e.target.elements.year.value;
-        console.log("country entered is", country);
-        console.log("year entered is", year);
+        let month = dateObj.getUTCMonth() + 1;
+        let year = dateObj.getUTCFullYear();
+        // console.log("country entered is", country);
+        // console.log("year entered is", year);
 
         // add to request body
-        fetch(`/api/holidays?country=${country}&year=${year}`, {
+        fetch(`/api/holidays?country=${country}&month=${month}&year=${year}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
