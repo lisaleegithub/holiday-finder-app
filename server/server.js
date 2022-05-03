@@ -15,7 +15,7 @@ const config = {
     secret: process.env.SECRET,
     baseURL: process.env.BASEURL,
     clientID: process.env.CLIENTID,
-    issuerBaseURL: process.env.ISSUER
+    issuerBaseURL: process.env.ISSUERBASEURL
 };
 
 const PORT = process.env.PORT || 3001;
