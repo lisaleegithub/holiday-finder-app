@@ -20,22 +20,17 @@ const config = {
 
 const PORT = process.env.PORT || 3001;
 app.use(cors());
-
 app.use(express.json());
 app.use(auth(config));
 
 // create an endpoint for the route /api
 app.get('/', (req, res) => {
-    // console.log(req.oidc.isAuthenticated());
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
 
 // create an endpoint for the route for the user authenticated
 app.get('/api/me', (req, res) => {
-    console.log(req.oidc.isAuthenticated());
-    // res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
     if (req.oidc.isAuthenticated()) {
-        console.log("req.oidc.user", req.oidc.user)
         res.json(req.oidc.user);
     } else {
         res.status(401).json({error: "Error in the auth0"});
