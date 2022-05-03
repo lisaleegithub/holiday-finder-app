@@ -1,22 +1,43 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const { auth } = require('express-openid-connect');
 require('dotenv').config()
 const db = require('../server/db/db-connection.js');
 const { count } = require('console');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 const axios = require('axios').default;
-app.use(express.static(REACT_BUILD_DIR));
 
-const PORT = process.env.PORT || 5000;
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASEURL,
+    clientID: process.env.CLIENTID,
+    issuerBaseURL: process.env.ISSUERBASEURL
+};
+
+const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
+app.use(auth(config));
 
 // create an endpoint for the route /api
 app.get('/', (req, res) => {
     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
+
+// create an endpoint for the route for the user authenticated
+app.get('/api/me', (req, res) => {
+    if (req.oidc.isAuthenticated()) {
+        res.json(req.oidc.user);
+    } else {
+        res.status(401).json({error: "Error in the auth0"});
+    }
+});
+
+app.use(express.static(REACT_BUILD_DIR));
 
 // create the get request for users table
 app.get('/api/users', cors(), async (req, res) => {

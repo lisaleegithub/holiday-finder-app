@@ -4,7 +4,7 @@ const TripForm = (props) => {
     const [countries, setCountries] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/countries")
+        fetch("/api/countries")
             .then((response) => response.json())
             .then((data) => {
                 setCountries(data.response.countries);
