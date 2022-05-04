@@ -22,9 +22,6 @@ const TripForm = (props) => {
                 ))}
             </select><br></br>
 
-            {/* <label for="year">Enter Year:</label>
-            <input type="text" name="year" placeholder="YYYY" required /><br></br> */}
-
             <label for="traveldate">Enter Travel Date:</label>
             <input type="date" name="traveldate" required /><br></br>
 
