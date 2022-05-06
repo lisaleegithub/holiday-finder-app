@@ -6,6 +6,7 @@ require('dotenv').config()
 const db = require('../server/db/db-connection.js');
 const { count } = require('console');
 const { response } = require('express');
+const { STATUS_CODES } = require('http');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 const axios = require('axios').default;
@@ -108,9 +109,10 @@ app.get("/api/countries", cors(), async (req, res) => {
 app.post('/api/trips', cors(), async (req, res) => {
     const newTrip = { country: req.body.country, traveldate: req.body.traveldate }
     // console.log([newTrip.country, newTrip.traveldate]);
-    console.log("oidc", req.oidc.user);
+    console.log("oidc from server", req.oidc.user);
     const result = await db.query(
         'INSERT INTO trips(country, traveldate) VALUES($1, $2) RETURNING *',
+        // ["France", 2022-02-02]
         [newTrip.country, newTrip.traveldate]
     );
     // console.log(result.rows[0]);
