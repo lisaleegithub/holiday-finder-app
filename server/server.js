@@ -5,6 +5,8 @@ const { auth } = require('express-openid-connect');
 require('dotenv').config()
 const db = require('../server/db/db-connection.js');
 const { count } = require('console');
+const { response } = require('express');
+const { STATUS_CODES } = require('http');
 const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const app = express();
 const axios = require('axios').default;
@@ -25,30 +27,49 @@ app.use(auth(config));
 
 // create an endpoint for the route /api
 app.get('/', (req, res) => {
-    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+    if (req.oidc && req.oidc.isAuthenticated()) {
+        // select all users with the email address given
+        db.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [req.oidc.user.email])
+            .then(result => {
+                if (result.rowCount > 0) {
+                    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+                } else {
+                    db.query('INSERT INTO users (name, email) VALUES ($1, $2)', [req.oidc.user["given_name"], req.oidc.user.email])
+                        .then(result => {
+                            res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+                        })
+                }
+            })
+    } else {
+        res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+    }
 });
 
 // create an endpoint for the route for the user authenticated
+// to get userid
 app.get('/api/me', (req, res) => {
     if (req.oidc.isAuthenticated()) {
-        res.json(req.oidc.user);
+        db.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [req.oidc.user.email])
+        .then(response => {
+            res.json(response.rows[0]);
+        })
     } else {
-        res.status(401).json({error: "Error in the auth0"});
+        res.status(401).json({ error: "Error in the auth0" });
     }
 });
 
 app.use(express.static(REACT_BUILD_DIR));
 
-// create the get request for users table
-app.get('/api/users', cors(), async (req, res) => {
-    try {
-        const { rows: users } = await db.query('SELECT * FROM users');
-        res.send(users);
-    } catch (e) {
-        console.log(e);
-        return res.status(400).json({ e });
-    }
-});
+// // create the get request for users table
+// app.get('/api/users', cors(), async (req, res) => {
+//     try {
+//         const { rows: users } = await db.query('SELECT * FROM users');
+//         res.send(users);
+//     } catch (e) {
+//         console.log(e);
+//         return res.status(400).json({ e });
+//     }
+// });
 
 // create the get request for trips table
 app.get('/api/trips', cors(), async (req, res) => {
@@ -63,7 +84,7 @@ app.get('/api/trips', cors(), async (req, res) => {
 
 // Make the GET request with the country and year (that it's the redirect from the user)
 app.get("/api/holidays", cors(), async (req, res) => {
-    const {country, month, year} = req.query;
+    const { country, month, year } = req.query;
     const url = `https://calendarific.com/api/v2/holidays?&api_key=${process.env.API_KEY}&type=national&country=${country}&month=${month}&year=${year}`;
     try {
         const requestResult = await axios.get(url);
@@ -84,17 +105,19 @@ app.get("/api/countries", cors(), async (req, res) => {
     }
 });
 
-// //create the POST request
-// app.post('/api/students', cors(), async (req, res) => {
-//     const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-//     console.log([newUser.firstname, newUser.lastname]);
-//     const result = await db.query(
-//         'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-//         [newUser.firstname, newUser.lastname]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-// });
+// create the POST request
+app.post('/api/trips', cors(), async (req, res) => {
+    const newTrip = { country: req.body.country, traveldate: req.body.traveldate }
+    // console.log([newTrip.country, newTrip.traveldate]);
+    console.log("oidc from server", req.oidc.user);
+    const result = await db.query(
+        'INSERT INTO trips(country, traveldate) VALUES($1, $2) RETURNING *',
+        // ["France", 2022-02-02]
+        [newTrip.country, newTrip.traveldate]
+    );
+    // console.log(result.rows[0]);
+    res.json(result.rows[0]);
+});
 
 // // delete request
 // app.delete('/api/students/:studentId', cors(), async (req, res) =>{
