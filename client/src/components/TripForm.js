@@ -35,21 +35,21 @@ const TripForm = (props) => {
     //A function to handle the post request
     const postTrips = (newTrip) => {
         return fetch('/api/trips', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify(newTrip)
-      }).then((response) => {
-          return response.json()
-      }).then((data) => {
-        console.log("From the post ", data);
-        props.addTrip(data);
-    });
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newTrip)
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log("From the post ", data);
+            props.addTrip(data);
+        });
     }
 
-    const handleSubmit = (e) => {
+    const handleOnClick = (e) => {
         // let emptyTrip = {
-            // country: "",
-            // traveldate: "",
+        // country: "",
+        // traveldate: "",
         // }
         e.preventDefault();
         console.log("current trip is" + JSON.stringify(trips));
@@ -60,8 +60,7 @@ const TripForm = (props) => {
     };
 
     return (
-        <form className="trip-form">
-        {/* <form className="trip-form" onSubmit={props.getTrip}> */}
+        <form className="trip-form" onSubmit={props.getTrip}>
             <label for="country">Select a Country: </label>
             <select name="country" id="country" onChange={handleCountryChange} required>
                 {countries.map((country) => (
@@ -74,8 +73,9 @@ const TripForm = (props) => {
             <label for="traveldate">Enter Travel Date:</label>
             <input type="date" name="traveldate" onChange={handleTraveldateChange} required /><br></br>
 
-            <button onSubmit={props.getTrip}> Search Holidays </button>
-            <button onSubmit={handleSubmit}> Add</button>
+            <button> Search Holidays </button>
+            <button onClick={handleOnClick}>Add to list</button>
+
         </form >
 
     )
