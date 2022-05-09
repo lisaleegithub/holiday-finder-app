@@ -1,5 +1,3 @@
-
-
 const Login = ({user}) => {
 
     return (

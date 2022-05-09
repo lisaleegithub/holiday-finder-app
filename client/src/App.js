@@ -28,7 +28,6 @@ function App() {
   return (
     <div className="App">
       <Login user={user}/>
-      {/* <Trip /> */}
       {user ? <Trip /> : (<h3>Please login</h3>)}
       {/* add how to use this app */}
     </div>

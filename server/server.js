@@ -112,7 +112,6 @@ app.post('/api/trips', cors(), async (req, res) => {
     console.log("oidc from server", req.oidc.user);
     const result = await db.query(
         'INSERT INTO trips(country, traveldate) VALUES($1, $2) RETURNING *',
-        // ["France", 2022-02-02]
         [newTrip.country, newTrip.traveldate]
     );
     // console.log(result.rows[0]);
