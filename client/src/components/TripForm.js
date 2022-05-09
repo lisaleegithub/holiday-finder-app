@@ -20,16 +20,14 @@ const TripForm = (props) => {
         // console.log(event);
         const country = event.target.value;
         setTrips((trips) => ({ ...trips, country }));
-        console.log("handle country change");
-        console.log(trips);
+        console.log("handle country change", trips);
     }
 
     const handleTraveldateChange = (event) => {
         // console.log(event);
         const traveldate = event.target.value;
         setTrips((trips) => ({ ...trips, traveldate }));
-        console.log("handle traveldate")
-        console.log(trips);
+        console.log("handle traveldate", trips)
     }
 
     //A function to handle the post request
@@ -42,7 +40,7 @@ const TripForm = (props) => {
             return response.json()
         }).then((data) => {
             console.log("From the post ", data);
-            props.addTrip(data);
+            props.addTrips(data);
         });
     }
 
@@ -52,32 +50,33 @@ const TripForm = (props) => {
         // traveldate: "",
         // }
         e.preventDefault();
-        console.log("current trip is" + JSON.stringify(trips));
+        console.log("current trip is (obj)" + JSON.stringify(trips));
         setTrips(trips); // set usestate for the form
         postTrips(trips); // make the post request to the db
-        // props.addTrip(trips); // sent the new trip to the parent
+        // props.addTrips(trips); // sent the new trip to the parent
         // setTrips(emptyTrip); // clear the fields
     };
 
     return (
-        <form className="trip-form" onSubmit={props.getTrip}>
-            <label for="country">Select a Country: </label>
-            <select name="country" id="country" onChange={handleCountryChange} required>
-                {countries.map((country) => (
-                    <option value={country["iso-3166"]}>
-                        {country.country_name}
-                    </option>
-                ))}
-            </select><br></br>
+        <div>
+            <form className="trip-form" onSubmit={props.getHolidays}>
+                <label for="country">Select a Country: </label>
+                <select name="country" id="country" onChange={handleCountryChange} required>
+                    {countries.map((country) => (
+                        <option value={country["iso-3166"]}>
+                            {country.country_name}, {country["iso-3166"]}
+                        </option>
+                    ))}
+                </select><br></br>
 
-            <label for="traveldate">Enter Travel Date:</label>
-            <input type="date" name="traveldate" onChange={handleTraveldateChange} required /><br></br>
+                <label for="traveldate">Enter Travel Date:</label>
+                <input type="date" name="traveldate" onChange={handleTraveldateChange} required /><br></br>
 
-            <button> Search Holidays </button>
+                <button> Search Holidays </button>
+                
+            </form >
             <button onClick={handleOnClick}>Add to list</button>
-
-        </form >
-
+        </div>
     )
 
 };
