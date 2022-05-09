@@ -53,7 +53,7 @@ const Trip = () => {
         <div>
             <div>
                 <h2>Holiday Finder</h2>
-                <TripForm getHolidays={getHolidays} />
+                <TripForm addTrips={addTrips} getHolidays={getHolidays} />
                 {holidays ? (<Holiday days={holidays} />) : (<p>{message}</p>)}
             </div>
             <div className="list-column">
