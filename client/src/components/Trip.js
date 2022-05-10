@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TripForm from "./TripForm";
 import Holiday from "./Holiday";
 
-const Trip = () => {
+const Trip = ({user}) => {
     const [holidays, setHolidays] = useState(null)
     const [message, setMessage] = useState("Find Holidays!");
     const [trips, setTrips] = useState([{
@@ -36,7 +36,7 @@ const Trip = () => {
     }
 
     useEffect(() => {
-        fetch("/api/trips")
+        fetch(`/api/${user.id}/trips/`)
             .then((response) => response.json())
             .then(trips => {
                 setTrips(trips);
@@ -53,7 +53,7 @@ const Trip = () => {
         <div>
             <div>
                 <h2>Holiday Finder</h2>
-                <TripForm addTrips={addTrips} getHolidays={getHolidays} />
+                <TripForm addTrips={addTrips} getHolidays={getHolidays} user={user}/>
                 {holidays ? (<Holiday days={holidays} />) : (<p>{message}</p>)}
             </div>
             <div className="list-column">

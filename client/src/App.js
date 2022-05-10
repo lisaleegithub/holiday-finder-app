@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <Login user={user}/>
-      {user ? <Trip /> : (<h3>Please login</h3>)}
+      {user ? <Trip user={user}/> : (<h3>Please login</h3>)}
       {/* add how to use this app */}
     </div>
   );
