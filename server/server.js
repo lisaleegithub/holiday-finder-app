@@ -72,9 +72,10 @@ app.use(express.static(REACT_BUILD_DIR));
 // });
 
 // create the get request for trips table
-app.get('/api/trips', cors(), async (req, res) => {
+app.get('/api/:userid/trips', cors(), async (req, res) => {
+    const userid = req.params.userid;
     try {
-        const { rows: trips } = await db.query('SELECT * FROM trips');
+        const { rows: trips } = await db.query('SELECT * FROM trips WHERE userid = $1', [userid]);
         res.send(trips);
     } catch (e) {
         console.log(e);
@@ -107,14 +108,11 @@ app.get("/api/countries", cors(), async (req, res) => {
 
 // create the POST request
 app.post('/api/trips', cors(), async (req, res) => {
-    const newTrip = { country: req.body.country, traveldate: req.body.traveldate }
-    // console.log([newTrip.country, newTrip.traveldate]);
-    console.log("oidc from server", req.oidc.user);
+    const {country, traveldate, userid} = req.body;
     const result = await db.query(
-        'INSERT INTO trips(country, traveldate) VALUES($1, $2) RETURNING *',
-        [newTrip.country, newTrip.traveldate]
+        'INSERT INTO trips(country, traveldate, userid) VALUES($1, $2, $3) RETURNING *',
+        [country, traveldate, userid]
     );
-    // console.log(result.rows[0]);
     res.json(result.rows[0]);
 });
 

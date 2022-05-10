@@ -32,6 +32,7 @@ const TripForm = (props) => {
 
     //A function to handle the post request
     const postTrips = (newTrip) => {
+        newTrip.userid = props.user.id;
         return fetch('/api/trips', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
