@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const TripForm = (props) => {
     const [countries, setCountries] = useState([]);
-    const [trips, setTrips] = useState({
+    const [trip, setTrip] = useState({
         country: "",
         traveldate: "",
     })
@@ -18,39 +18,36 @@ const TripForm = (props) => {
     //create functions that handle the event of user input
     const handleCountryChange = (event) => {
         const country = event.target.value;
-        setTrips((trips) => ({ ...trips, country }));
+        setTrip((trip) => ({ ...trip, country }));
     }
 
     const handleTraveldateChange = (event) => {
         const traveldate = event.target.value;
-        setTrips((trips) => ({ ...trips, traveldate }));
+        setTrip((trip) => ({ ...trip, traveldate }));
     }
 
     //A function to handle the post request
-    const postTrips = (newTrip) => {
+    const postTrip = (newTrip) => {
         newTrip.userid = props.user.id;
         return fetch('/api/trips', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTrip)
         }).then((response) => {
-            return response.json()
-        }).then((data) => {
-            // console.log("From the post ", data);
-            props.addTrips(data);
+            return props.onTripAdded(response);
         });
     }
 
-    const handleOnClick = (e) => {
+    const handleOnClick = async (e) => {
         // let emptyTrip = {
         //     country: null,
         //     traveldate: null,
         // }
         e.preventDefault();
-        // console.log("current trip is (obj)" + JSON.stringify(trips));
-        setTrips(trips); // set usestate for the form
-        postTrips(trips); // make the post request to the db
-        // setTrips(emptyTrip); // clear the fields
+        // console.log("current trip is (obj)" + JSON.stringify(trip));
+        // setTrip(trip); // set usestate for the form
+        await postTrip(trip); // make the post request to the db
+        // setTrip(emptyTrip); // clear the fields
     };
 
     return (
