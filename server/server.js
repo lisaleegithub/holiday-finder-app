@@ -75,7 +75,7 @@ app.use(express.static(REACT_BUILD_DIR));
 app.get('/api/:userid/trips', cors(), async (req, res) => {
     const userid = req.params.userid;
     try {
-        const { rows: trips } = await db.query('SELECT * FROM trips WHERE userid = $1', [userid]);
+        const { rows: trips } = await db.query('SELECT * FROM trips INNER JOIN countries ON countries.code = trips.country WHERE userid = $1 ', [userid]);
         res.send(trips);
     } catch (e) {
         console.log(e);

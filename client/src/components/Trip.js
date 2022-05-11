@@ -35,18 +35,33 @@ const Trip = ({ user }) => {
             .catch((err) => console.error(`Error: ${err}`));
     }
 
-    useEffect(() => {
+    useEffect(fetchTrips, []);
+
+    // function to handle add to list functionality
+    const onTripAdded = () => {
+        return fetchTrips();
+    }
+
+    function fetchTrips() {
         fetch(`/api/${user.id}/trips/`)
             .then((response) => response.json())
             .then(trips => {
                 setTrips(trips);
-            })
-    }, []);
+            });
+    };
 
-    // function to handle add to list functionality
-    const addTrips = (newTrip) => {
-        setTrips((trips) => [...trips, newTrip]);
-    }
+    // useEffect(() => {
+    //     fetch(`/api/${user.id}/trips/`)
+    //         .then((response) => response.json())
+    //         .then(trips => {
+    //             setTrips(trips);
+    //         })
+    // }, []);
+
+    // // function to handle add to list functionality
+    // const addTrips = (newTrip) => {
+    //     setTrips((trips) => [...trips, newTrip]);
+    // }
 
     // to formate date and time
     function formatDate(input) {
@@ -62,7 +77,7 @@ const Trip = ({ user }) => {
         <div>
             <div>
                 <h2>Holiday Finder</h2>
-                <TripForm addTrips={addTrips} getHolidays={getHolidays} user={user} />
+                <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
                 {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
             </div>
             <div className="list-column">
@@ -70,7 +85,7 @@ const Trip = ({ user }) => {
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                            <li>Trip{" "}{index + 1}{": "} {trip.country}{", "} {formatDate(trip.traveldate)}</li>
+                            <li>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</li>
                         </li>)}
                 </ul>
             </div>
