@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TripForm from "./TripForm";
 import Holiday from "./Holiday";
 
-const Trip = ({user}) => {
+const Trip = ({ user }) => {
     const [holidays, setHolidays] = useState(null)
     const [message, setMessage] = useState("Find Holidays!");
     const [trips, setTrips] = useState([{
@@ -46,25 +46,31 @@ const Trip = ({user}) => {
     // function to handle add to list functionality
     const addTrips = (newTrip) => {
         setTrips((trips) => [...trips, newTrip]);
-        console.log("line 41 trips", trips);
+    }
+
+    // to formate date and time
+    function formatDate(input) {
+        let date = new Date(input);
+        let year = date.getFullYear();
+        let month = date.toLocaleString([], {
+            month: 'long',
+        });
+        return month + " " + year;
     }
 
     return (
         <div>
             <div>
                 <h2>Holiday Finder</h2>
-                <TripForm addTrips={addTrips} getHolidays={getHolidays} user={user}/>
-                {holidays ? (<Holiday days={holidays} />) : (<p>{message}</p>)}
+                <TripForm addTrips={addTrips} getHolidays={getHolidays} user={user} />
+                {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
             </div>
             <div className="list-column">
-                <h2> List of Trips </h2>
+                <h2> {user.name}'s Saved Trips </h2>
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                            <ul className="circle">
-                                <li>{trip.country}</li>
-                                <li>{trip.traveldate}</li>
-                            </ul>
+                            <li>Trip{" "}{index + 1}{": "} {trip.country}{", "} {formatDate(trip.traveldate)}</li>
                         </li>)}
                 </ul>
             </div>
