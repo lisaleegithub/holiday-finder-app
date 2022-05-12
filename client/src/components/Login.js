@@ -5,7 +5,7 @@ const Login = ({user}) => {
             <ul>
                 {/* if there is no user, bring the login. If there is, bring logout  */}
                 {!user ? (<li> <a href="/login">LOGIN</a></li>)
-                    : (<li> Hello, {user.name}<a href="/logout">LOGOUT</a></li>)}
+                    : (<li> Hello, {user.name}{" "}<a href="/logout">LOGOUT</a></li>)}
             </ul>
         </nav >
     )

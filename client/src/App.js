@@ -1,11 +1,14 @@
-import './App.css';
-import Login from './components/Login';
-import Trip from './components/Trip';
+import React from 'react';
+import './index.css';
+import Page from './Page';
+import Home from './Routes/Home';
+import Contact from './Routes/Contact';
+import About from './Routes/About';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function App() {
-
-  const [user, setUser] = useState(undefined);
+    const [user, setUser] = useState(undefined);
 
   const loadUser = () => {
     fetch("/api/me")
@@ -25,13 +28,17 @@ function App() {
     loadUser();
   }, []);
 
-  return (
-    <div className="App">
-      <Login user={user}/>
-      {user ? <Trip user={user}/> : (<h3>Please login</h3>)}
-      {/* add how to use this app */}
-    </div>
-  );
+return (
+    <Router>
+        <Routes>
+            <Route path="/" element={<Page user={user}/>}>
+                <Route path="/" element={<Home user={user} />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+            </Route>
+        </Routes>
+    </Router>
+    )
 }
 
 export default App;
