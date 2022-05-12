@@ -24,10 +24,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -40,3 +36,37 @@
 ul{
   list-style: none;
 }
+
+/* added */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a, li {
+  text-decoration: none;
+  list-style-type: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn:hover {
+  background: rgba(253, 253, 253, 0.5);
+  transition: 0.3s ease;
+}
+
+.nav {
+  color: blue;
+  display: flex;
+  align-items: center;
+}
+
+.nav a {
+  color: red;
+}
+
+
