@@ -14,6 +14,10 @@ const Trip = ({ user }) => {
         e.preventDefault();
         let dateObj = new Date(e.target.elements.traveldate.value)
         let country = e.target.elements.country.value;
+        fetchHolidays(dateObj, country);
+    }
+
+    function fetchHolidays(dateObj, country) {
         let month = dateObj.getUTCMonth() + 1;
         let year = dateObj.getUTCFullYear();
 
@@ -35,7 +39,7 @@ const Trip = ({ user }) => {
             .catch((err) => console.error(`Error: ${err}`));
     }
 
-    useEffect(fetchTrips, []);
+    useEffect(fetchTrips, [user]);
 
     // function to handle add to list functionality
     const onTripAdded = () => {
@@ -49,19 +53,6 @@ const Trip = ({ user }) => {
                 setTrips(trips);
             });
     };
-
-    // useEffect(() => {
-    //     fetch(`/api/${user.id}/trips/`)
-    //         .then((response) => response.json())
-    //         .then(trips => {
-    //             setTrips(trips);
-    //         })
-    // }, []);
-
-    // // function to handle add to list functionality
-    // const addTrips = (newTrip) => {
-    //     setTrips((trips) => [...trips, newTrip]);
-    // }
 
     // to formate date and time
     function formatDate(input) {
@@ -85,7 +76,7 @@ const Trip = ({ user }) => {
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                            <li>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</li>
+                           <button onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
                         </li>)}
                 </ul>
             </div>

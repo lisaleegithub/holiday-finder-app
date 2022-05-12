@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const TripForm = (props) => {
     const [countries, setCountries] = useState([]);
     const [trip, setTrip] = useState({
-        country: "",
+        country: "DEFAULT",
         traveldate: "",
     })
 
@@ -11,7 +11,7 @@ const TripForm = (props) => {
         fetch("/api/countries")
             .then((response) => response.json())
             .then((data) => {
-                setCountries(data.response.countries);
+                setCountries(data);
             });
     }, []);
 
@@ -39,33 +39,33 @@ const TripForm = (props) => {
     }
 
     const handleOnClick = async (e) => {
-        // let emptyTrip = {
-        //     country: null,
-        //     traveldate: null,
-        // }
+        let emptyTrip = {
+            country: "DEFAULT",
+            traveldate: "",
+        }
         e.preventDefault();
         // console.log("current trip is (obj)" + JSON.stringify(trip));
         // setTrip(trip); // set usestate for the form
         await postTrip(trip); // make the post request to the db
-        // setTrip(emptyTrip); // clear the fields
+        setTrip(emptyTrip); // clear the fields
     };
 
     return (
         <div>
             <form className="trip-form" onSubmit={props.getHolidays}>
-                <label for="country">Country: </label>
+                <label htmlFor="country">Country: </label>
 
-                <select name="country" id="country" onChange={handleCountryChange} required>
-                    <option disabled={true} selected={true} value={null}> -- Select a Country -- </option>
+                <select name="country" id="country" onChange={handleCountryChange} value={trip.country} required>
+                    <option disabled={true} value={"DEFAULT"} key="0"> -- Select a Country -- </option>
                     {countries.map((country) => (
-                        <option value={country["iso-3166"]}>
-                            {country.country_name}, {country["iso-3166"]}
+                        <option key={country.code} value={country.code}>
+                            {country.name}, {country.code}
                         </option>
                     ))}
                 </select><br></br>
 
-                <label for="traveldate">Travel Date:</label>
-                <input type="date" name="traveldate" onChange={handleTraveldateChange} required /><br></br>
+                <label htmlFor="traveldate">Travel Date:</label>
+                <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} required /><br></br>
 
                 <button> Search Holidays </button>
 

@@ -60,22 +60,12 @@ app.get('/api/me', (req, res) => {
 
 app.use(express.static(REACT_BUILD_DIR));
 
-// // create the get request for users table
-// app.get('/api/users', cors(), async (req, res) => {
-//     try {
-//         const { rows: users } = await db.query('SELECT * FROM users');
-//         res.send(users);
-//     } catch (e) {
-//         console.log(e);
-//         return res.status(400).json({ e });
-//     }
-// });
 
 // create the get request for trips table
 app.get('/api/:userid/trips', cors(), async (req, res) => {
     const userid = req.params.userid;
     try {
-        const { rows: trips } = await db.query('SELECT * FROM trips INNER JOIN countries ON countries.code = trips.country WHERE userid = $1 ', [userid]);
+        const { rows: trips } = await db.query('SELECT * FROM trips INNER JOIN countries ON countries.code = trips.country WHERE userid = $1 ORDER BY traveldate ASC', [userid]);
         res.send(trips);
     } catch (e) {
         console.log(e);
@@ -97,12 +87,12 @@ app.get("/api/holidays", cors(), async (req, res) => {
 
 // Make the GET request with the country name and country code
 app.get("/api/countries", cors(), async (req, res) => {
-    const url = `https://calendarific.com/api/v2/countries?api_key=${process.env.API_KEY}`;
     try {
-        const countriesResult = await axios.get(url);
-        res.send(countriesResult.data);
-    } catch (err) {
-        console.error("Fetch error: ", err);
+        const { rows: countries } = await db.query('SELECT * FROM countries');
+        res.send(countries);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).json({ e });
     }
 });
 
