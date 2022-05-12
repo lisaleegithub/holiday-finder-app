@@ -2,6 +2,7 @@ import './App.css';
 import Login from './components/Login';
 import Trip from './components/Trip';
 import { useState, useEffect } from "react";
+import Navigation from './components/Navigation';
 
 function App() {
 
@@ -26,7 +27,8 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="container">
+      <Navigation />
       <Login user={user}/>
       {user ? <Trip user={user}/> : (<h3>Please login</h3>)}
       {/* add how to use this app */}
