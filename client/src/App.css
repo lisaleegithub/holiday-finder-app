@@ -46,8 +46,6 @@ ul{
 
 a, li {
   text-decoration: none;
-  list-style-type: none;
-  color: blue;
 }
 
 a:hover {
@@ -58,15 +56,4 @@ a:hover {
   background: rgba(253, 253, 253, 0.5);
   transition: 0.3s ease;
 }
-
-.nav {
-  color: blue;
-  display: flex;
-  align-items: center;
-}
-
-.nav a {
-  color: red;
-}
-
 
