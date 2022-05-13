@@ -57,7 +57,7 @@ function ContactForm() {
           />
         </div>
 
-        <button type="submit" className="submit-button">Submit</button>
+        <button type="submit" className="submit-button" class="btn btn-primary">Submit</button>
       </form>
     </div>
   );

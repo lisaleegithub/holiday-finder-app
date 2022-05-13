@@ -52,7 +52,7 @@ const TripForm = (props) => {
 
     return (
         <div>
-            <form className="trip-form" onSubmit={props.getHolidays}>
+            <form class="form-group" onSubmit={props.getHolidays}>
                 <label htmlFor="country">Country: </label>
 
                 <select name="country" id="country" onChange={handleCountryChange} value={trip.country} required>
@@ -66,11 +66,11 @@ const TripForm = (props) => {
 
                 <label htmlFor="traveldate">Travel Date:</label>
                 <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} required /><br></br>
-
-                <button> Search Holidays </button>
-
+                <br></br>
+                <button type="submit" className="submit-button" class="btn btn-primary btn-sm"> Search Holidays </button>
             </form >
-            <button onClick={handleOnClick}>Add to list</button>
+            <br></br>
+            <button onClick={handleOnClick} class="btn btn-primary btn-sm">Add to list</button><br></br>
         </div>
     )
 
