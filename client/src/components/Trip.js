@@ -54,6 +54,17 @@ const Trip = ({ user }) => {
             });
     };
 
+    // a function to handle the Delete functionality
+    const onDelete = (trip) => {
+        return fetch(`/api/trips/${trip.id}`, {
+            method: "DELETE"
+        }).then((response) => {
+            if (response.ok) {
+                fetchTrips();
+            }
+        })
+    }
+
     // to formate date and time
     function formatDate(input) {
         let date = new Date(input);
@@ -76,7 +87,8 @@ const Trip = ({ user }) => {
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                           <button onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
+                            <button onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
+                            <button type="button" className="delete-button" onClick={() => { onDelete(trip) }}>Delete</button>
                         </li>)}
                 </ul>
             </div>
