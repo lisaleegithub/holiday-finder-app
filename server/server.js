@@ -73,6 +73,13 @@ app.get('/api/:userid/trips', cors(), async (req, res) => {
     }
 });
 
+// delete request
+app.delete('/api/trips/:tripid', cors(), async (req, res) =>{
+    const tripid = req.params.tripid;
+    await db.query('DELETE FROM trips WHERE id=$1', [tripid]);
+    res.status(200).end();
+});
+
 // Make the GET request with the country and year (that it's the redirect from the user)
 app.get("/api/holidays", cors(), async (req, res) => {
     const { country, month, year } = req.query;
@@ -105,15 +112,6 @@ app.post('/api/trips', cors(), async (req, res) => {
     );
     res.json(result.rows[0]);
 });
-
-// // delete request
-// app.delete('/api/students/:studentId', cors(), async (req, res) =>{
-//     const studentId = req.params.studentId;
-//     //console.log(req.params);
-//     await db.query('DELETE FROM students WHERE id=$1', [studentId]);
-//     res.status(200).end();
-
-// });
 
 // // Put request - Update request
 // app.put('/api/students/:studentId', cors(), async (req, res) =>{
