@@ -8,8 +8,9 @@ function Page({ user }) {
   return (
     <div className="container">
       <Navigation />
-      <Outlet />
       <Login user={user}/>
+      <Outlet />
+      {/* <Login user={user}/> */}
     </div>
   );
 }
