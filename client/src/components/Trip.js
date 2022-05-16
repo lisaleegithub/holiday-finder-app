@@ -4,7 +4,7 @@ import Holiday from "./Holiday";
 
 const Trip = ({ user }) => {
     const [holidays, setHolidays] = useState(null)
-    const [message, setMessage] = useState("Find Holidays!");
+    const [message, setMessage] = useState("");
     const [trips, setTrips] = useState([{
         country: "",
         traveldate: "",
@@ -87,8 +87,8 @@ const Trip = ({ user }) => {
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                            <button onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
-                            <button type="button" className="delete-button" onClick={() => { onDelete(trip) }}>Delete</button>
+                            <button class="btn btn-light btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
+                            <button type="button" className="delete-button" class="btn btn-warning btn-sm" onClick={() => { onDelete(trip) }}>Delete</button>
                         </li>)}
                 </ul>
             </div>
