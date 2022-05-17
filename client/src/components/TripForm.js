@@ -44,18 +44,16 @@ const TripForm = (props) => {
             traveldate: "",
         }
         e.preventDefault();
-        // console.log("current trip is (obj)" + JSON.stringify(trip));
-        // setTrip(trip); // set usestate for the form
         await postTrip(trip); // make the post request to the db
         setTrip(emptyTrip); // clear the fields
     };
 
     return (
-        <div>
-            <form class="form-group" onSubmit={props.getHolidays}>
+        <div className="container trip-form">
+            <form className="form-group" onSubmit={props.getHolidays}>
                 <label htmlFor="country">Country: </label>
 
-                <select name="country" id="country" onChange={handleCountryChange} value={trip.country} required>
+                <select name="country" id="country" onChange={handleCountryChange} value={trip.country} className="form-control" required>
                     <option disabled={true} value={"DEFAULT"} key="0"> -- Select a Country -- </option>
                     {countries.map((country) => (
                         <option key={country.code} value={country.code}>
@@ -65,12 +63,12 @@ const TripForm = (props) => {
                 </select><br></br>
 
                 <label htmlFor="traveldate">Travel Date:</label>
-                <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} required /><br></br>
+                <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} className="form-control" required /><br></br>
                 <br></br>
-                <button type="submit" className="submit-button" class="btn btn-primary btn-sm"> Search Holidays </button>
+                <button type="submit" className="submit-button btn btn-primary btn-sm"> Search Holidays </button>
             </form >
             <br></br>
-            <button onClick={handleOnClick} class="btn btn-primary btn-sm">Add to list</button><br></br>
+            <button onClick={handleOnClick} className="btn btn-primary btn-sm">Add to list</button><br></br>
         </div>
     )
 

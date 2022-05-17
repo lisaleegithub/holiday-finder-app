@@ -1,11 +1,10 @@
 const Login = ({user}) => {
 
     return (
-        <nav>
+        <nav className="login-container">
             <ul>
-                {/* if there is no user, bring the login. If there is, bring logout  */}
-                {!user ? (<li> <a href="/login">LOGIN</a></li>)
-                    : (<li> Hello, {user.name}{" "}<a href="/logout">LOGOUT</a></li>)}
+                {!user ? (<li> <button className="login submit-button btn btn-primary btn-sm"><a href="/login">LOGIN</a></button></li>)
+                    : (<li> Hello, {user.name}{" "}<button className="logout submit-button btn btn-primary btn-sm"><a href="/logout">LOGOUT</a></button></li>)}
             </ul>
         </nav >
     )
