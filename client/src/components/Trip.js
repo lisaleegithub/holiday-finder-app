@@ -76,19 +76,20 @@ const Trip = ({ user }) => {
     }
 
     return (
-        <div>
-            <div>
+        <div className="container">
+            <div className="column">
                 <h2>Holiday Finder</h2>
                 <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
                 {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
             </div>
-            <div className="list-column">
-                <h2> {user.name}'s Saved Trips </h2>
+
+            <div className="column">
+                <h2>My Saved Trips</h2>
                 <ul className="list-container">
                     {trips.map((trip, index) =>
                         <li key={index}>
-                            <button class="btn btn-light btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
-                            <button type="button" className="delete-button" class="btn btn-warning btn-sm" onClick={() => { onDelete(trip) }}>Delete</button>
+                            <button className="btn holiday-btn btn-light btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
+                            <button className="delete-button btn btn-warning btn-sm" onClick={() => { onDelete(trip) }}>Delete</button>
                         </li>)}
                 </ul>
             </div>

@@ -1,5 +1,22 @@
-.App {
+* {
   text-align: center;
+  /* font-family: 'Noto Sans', sans-serif; */
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Tinos', serif; */
+  /* font-family: 'Cardo', serif; */
+  /* font-family: 'DM Serif Text', serif; */
+  /* font-family: 'Castoro', serif; */
+  font-family: 'Alegreya', serif;
+
+  
+}
+
+h1,
+h2,
+h3,
+.navbar-brand {
+  /* font-family: 'Secular One', sans-serif; */
+  font-family: 'DM Serif Text', serif;
 }
 
 .App-logo {
@@ -28,12 +45,13 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-ul{
+ul {
   list-style: none;
 }
 
@@ -44,7 +62,8 @@ ul{
   box-sizing: border-box;
 }
 
-a, li {
+a,
+li {
   text-decoration: none;
   margin: 0 20px;
   align-items: left;
@@ -57,6 +76,8 @@ a:hover {
 .btn:hover {
   background: rgba(253, 253, 253, 0.5);
   transition: 0.3s ease;
+  
+  
 }
 
 /*
@@ -66,18 +87,62 @@ a:hover {
 
 */
 
-header {
+.home {
   background-blend-mode: multiply;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
+  /* background-size: cover; */
   background-image: url(https://cdn.wallpapersafari.com/11/68/D3nhmp.jpg);
-  height: 100vh;
+  /* background-image: url("https://img.freepik.com/free-photo/travel-world-monument-concept_117023-15.jpg?w=2000"); */
+  /* background-image: url("https://img.freepik.com/free-vector/famous-monuments-around-globe_1057-765.jpg?w=1060&t=st=1652740839~exp=1652741439~hmac=12b0c5b72ee13d9283130bc96c024c828d85ccdb32154d655eb08c5e7b82fc2a"); */
+  /* background-image: url("https://thumbs.dreamstime.com/b/famous-world-landmarks-located-around-globe-isolated-black-background-design-travel-tourism-copy-famous-world-129637646.jpg"); */
+  background-image: url("https://i.pinimg.com/736x/f5/84/c8/f584c8cb37b083297a4a4437b1f848f5.jpg");
+  /* height: 100vh; */
+  background-size:100% 100%;
 }
 
-.header-content {
+.landing-content {
   margin-bottom: 150px;
   color: whitesmoke;
   text-align: center;
+}
+
+.login-container a {
+  text-decoration: none;
+  align-items: left;
+  color: white;
+}
+
+.holiday-btn, .login, .logout {
+  all: unset;
+}
+
+.list-container {
+  align-items: left;
+}
+
+.column {
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+/* button */
+.btn:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.btn:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
 }
