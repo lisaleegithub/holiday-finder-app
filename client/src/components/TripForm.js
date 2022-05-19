@@ -52,7 +52,6 @@ const TripForm = (props) => {
         <div className="container trip-form">
             <form className="form-group" onSubmit={props.getHolidays}>
                 <label htmlFor="country">Country: </label>
-
                 <select name="country" id="country" onChange={handleCountryChange} value={trip.country} className="form-control" required>
                     <option disabled={true} value={"DEFAULT"} key="0"> -- Select a Country -- </option>
                     {countries.map((country) => (
@@ -64,11 +63,10 @@ const TripForm = (props) => {
 
                 <label htmlFor="traveldate">Travel Date:</label>
                 <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} className="form-control" required /><br></br>
-                <br></br>
                 <button type="submit" className="submit-button btn btn-primary btn-sm"> Search Holidays </button>
+                <button onClick={handleOnClick} className="btn btn-primary btn-sm">Save Trip</button><br></br>
             </form >
-            <br></br>
-            <button onClick={handleOnClick} className="btn btn-primary btn-sm">Add to list</button><br></br>
+            
         </div>
     )
 
