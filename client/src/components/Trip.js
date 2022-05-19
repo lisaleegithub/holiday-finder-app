@@ -4,7 +4,7 @@ import Holiday from "./Holiday";
 
 const Trip = ({ user }) => {
     const [holidays, setHolidays] = useState(null)
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState("Nothing to display yet!");
     const [trips, setTrips] = useState([{
         country: "",
         traveldate: "",
@@ -33,7 +33,7 @@ const Trip = ({ user }) => {
                 if (data.response.holidays.length !== 0) {
                     setHolidays(data.response.holidays);
                 } else {
-                    setMessage("No holidays");
+                    setMessage(`No national holidays to display!`);
                 }
             })
             .catch((err) => console.error(`Error: ${err}`));
@@ -70,7 +70,7 @@ const Trip = ({ user }) => {
         let date = new Date(input);
         let year = date.getFullYear();
         let month = date.toLocaleString([], {
-            month: 'long',
+            month: 'short',
         });
         return month + " " + year;
     }
@@ -78,18 +78,23 @@ const Trip = ({ user }) => {
     return (
         <div className="container">
             <div className="column">
-                <h2>Holiday Finder</h2>
-                <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
-                {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
-            </div>
+                <div>
+                    <h2>🗓Let's Find Holidays🌏</h2>
+                    <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
+                </div>
 
+                <div>
+                    <h2>List of Holidays</h2>
+                    {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
+                </div>
+            </div>
             <div className="column">
-                <h2>My Saved Trips</h2>
-                <ul className="list-container">
+                <h2>🛫My Saved Trips🛬</h2>
+                <ul id="list-container">
                     {trips.map((trip, index) =>
-                        <li key={index}>
-                            <button className="btn holiday-btn btn-light btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}>Trip{" "}{index + 1}{": "} {trip.name}{", "} {formatDate(trip.traveldate)}</button>
-                            <button className="delete-button btn btn-warning btn-sm" onClick={() => { onDelete(trip) }}>Delete</button>
+                        <li className="trip-list" key={index}>
+                            <button className="btn delete-button btn-sm" onClick={() => { onDelete(trip) }}>✖</button>
+                            <button className="btn holiday-btn btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}> {formatDate(trip.traveldate)}{" | "}{trip.name} </button>
                         </li>)}
                 </ul>
             </div>

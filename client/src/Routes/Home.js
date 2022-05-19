@@ -5,9 +5,9 @@ import Trip from "../components/Trip";
 
 export default function Home({ user }) {
     return (
-        <div className="home">
-            <Login user={user}/>
-            {user ? <Trip user={user} /> : (<Landing/>)}
+        <div className="page">
+            <Login user={user} />
+            {user ? <Trip user={user} /> : (<Landing />)}
         </div>
     )
 }

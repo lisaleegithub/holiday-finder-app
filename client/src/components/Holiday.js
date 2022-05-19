@@ -1,13 +1,15 @@
 const Holiday = ({ days }) => {
 
     return (
-        <div>
+
+        <div className="card-deck">
             {days.map((day, index) =>
-                <p key={index}>
-                    {day.name}<br />
-                    {day.description}<br />
-                    {day.date.iso} </p>
-            )}
+                <div className="card">
+                    <p key={index}>
+                        <div className="card-header">{day.date.iso} | {day.name} <br /></div>
+                        <p class="card-text">{day.description}</p></p>
+                </div>)}
+
         </div>
     );
 

@@ -7,30 +7,106 @@
   /* font-family: 'DM Serif Text', serif; */
   /* font-family: 'Castoro', serif; */
   font-family: 'Alegreya', serif;
-
-  
 }
 
 h1,
 h2,
-h3,
-.navbar-brand {
+h3 {
   /* font-family: 'Secular One', sans-serif; */
   font-family: 'DM Serif Text', serif;
+  display: block;
 }
 
-.App-logo {
+.navbar-brand {
+  font-family: 'DM Serif Text', serif;
+  display: block;
+}
+
+.nav-name {
+  color: #F1EAE5;
+  background-color: #F1EAE5;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: rgba(238, 255, 242, 0.9) 0px 0px 5px;
+}
+
+.navbar-toggler-icon {
+  text-align: right;
+  width: 20px;
+}
+
+/* navbar */
+
+.navbar {
+  display: inline block;
+  /* text-align: left; */
+  background-color: #2E334B;
+  /* box-shadow: 0px 5px 0px #F1EAE5; */
+}
+
+.navbar ul {
+  list-style: none;
+  /* text-align: center; */
+}
+
+.navbar ul li {
+  display: inline-block;
+}
+
+.navbar ul li a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: #F1EAE5;
+  text-transform: uppercase;
+}
+
+.navbar ul li a,
+.navbar ul li a:after,
+.navbar ul li a:before {
+  transition: all .5s;
+}
+
+/* .navbar ul li a:hover {
+  color: #F1EAE5;
+} */
+
+/* stroke */
+.navbar ul li a {
+  position: relative;
+}
+
+.navbar ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #E19928;
+  height: 1px;
+}
+
+.navbar ul li a:hover:after {
+  width: 80%;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -39,9 +115,9 @@ h3,
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -49,7 +125,7 @@ h3,
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 ul {
   list-style: none;
@@ -67,45 +143,60 @@ li {
   text-decoration: none;
   margin: 0 20px;
   align-items: left;
+  /* text-transform: uppercase; */
 }
 
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
 .btn:hover {
-  background: rgba(253, 253, 253, 0.5);
+  background: rgba(253, 253, 253, 0.7);
   transition: 0.3s ease;
-  
-  
 }
 
 /*
 
-
-
-
 */
 
-.home {
+.page {
   background-blend-mode: multiply;
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-position: center center;
-  /* background-size: cover; */
-  background-image: url(https://cdn.wallpapersafari.com/11/68/D3nhmp.jpg);
-  /* background-image: url("https://img.freepik.com/free-photo/travel-world-monument-concept_117023-15.jpg?w=2000"); */
-  /* background-image: url("https://img.freepik.com/free-vector/famous-monuments-around-globe_1057-765.jpg?w=1060&t=st=1652740839~exp=1652741439~hmac=12b0c5b72ee13d9283130bc96c024c828d85ccdb32154d655eb08c5e7b82fc2a"); */
-  /* background-image: url("https://thumbs.dreamstime.com/b/famous-world-landmarks-located-around-globe-isolated-black-background-design-travel-tourism-copy-famous-world-129637646.jpg"); */
-  background-image: url("https://i.pinimg.com/736x/f5/84/c8/f584c8cb37b083297a4a4437b1f848f5.jpg");
-  /* height: 100vh; */
-  background-size:100% 100%;
+  background-size: cover;
+  height: 100vh;
+  background-image: url("https://i.ytimg.com/vi/ztHPXKJgJUE/maxresdefault.jpg");
 }
 
 .landing-content {
-  margin-bottom: 150px;
-  color: whitesmoke;
-  text-align: center;
+  color: #F1EAE5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  margin: 50px auto;
+  padding: 15px;
+  border: #F1EAE5;
+  background: rgba(0, 0, 0, .8);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.line {
+  width: 150px;
+  height: 4px;
+  background: orange;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.login-container {
+  padding: 10px 0px 0px 0px;
+  display: block;
+  color: #F1EAE5;
+  /* background-color: #D2D8E1; */
+  /* box-shadow: 0px 5px 0px #fff; */
+  background-color: rgba(46, 51, 75);
 }
 
 .login-container a {
@@ -114,35 +205,62 @@ a:hover {
   color: white;
 }
 
-.holiday-btn, .login, .logout {
+.holiday-btn,
+.login,
+.logout {
   all: unset;
 }
 
-.list-container {
-  align-items: left;
-}
 
 .column {
   margin: 10px auto;
   padding: 15px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.4);
+  /* background: rgba(210, 216, 225, 0.8); */
+  background: rgba(241, 234, 229, 0.8);
+  /* background: rgba(171, 170, 158, 0.7); */
+  /* background: rgba(144, 143, 133, 0.5); */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
-
 /* button */
-.btn:focus {
+/* .btn:focus {
   box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+} */
+.btn {
+  background-color: #2E334B;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  margin: 2px;
+  padding: 5px;
+  font-size: 1rem;
 }
 
 .btn:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  /* box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset; */
   transform: translateY(-2px);
+  color: #2E334B;
+  background-color: #E19928;
 }
 
 .btn:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
+  /* box-shadow: #D6D6E7 0 3px 7px inset; */
   transform: translateY(2px);
 }
+
+/* saved trips buttons */
+.trip-list button {
+  border-radius: 0;
+  font-size: 0.7rem;
+}
+
+.about-text {
+  text-align: justify;
+}
+
+/* .log-btn a {
+  background-color: #2E334B;
+  color:#E19928;
+  margin: 2px;
+} */
