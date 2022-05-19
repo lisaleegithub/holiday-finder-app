@@ -78,15 +78,16 @@ const Trip = ({ user }) => {
     return (
         <div className="container">
             <div className="column">
-                <h2>🗓Let's Find Holidays🌏</h2>
-                <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
+                <div>
+                    <h2>🗓Let's Find Holidays🌏</h2>
+                    <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
                 </div>
-                 
-            <div className="column">
-                <h5>List of Holidays</h5>
-                {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
-            </div>
 
+                <div>
+                    <h2>List of Holidays</h2>
+                    {holidays ? (<Holiday days={holidays} message={""} />) : (<p>{message}</p>)}
+                </div>
+            </div>
             <div className="column">
                 <h2>🛫My Saved Trips🛬</h2>
                 <ul id="list-container">
