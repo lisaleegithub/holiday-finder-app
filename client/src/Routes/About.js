@@ -1,3 +1,5 @@
+import Slideshow from "../components/Slideshow";
+
 export default function About() {
     return (
         <div className="page">
@@ -17,6 +19,7 @@ export default function About() {
                     </p>
                 </div>
             </div>
+            <Slideshow/>
         </ div>
     );
 }
