@@ -330,10 +330,11 @@ eSwatini	SZ
 --
 
 COPY public.trips (id, country, userid, traveldate) FROM stdin;
-94	AM	11	2022-05-10
-99	AF	11	2024-02-22
-102	JP	11	2024-01-18
-103	KR	11	2022-08-17
+121	US	11	2022-09-14
+123	TH	11	2023-04-05
+113	KR	11	2022-09-14
+114	IN	11	2022-11-10
+115	GB	11	2023-04-19
 \.
 
 
@@ -346,6 +347,7 @@ COPY public.users (id, name, email) FROM stdin;
 2	John	john@john.com
 4	derek	derek@derek.com
 11	Lisa	lisawlee04@gmail.com
+12	Lisa	leewlisa04@gmail.com
 \.
 
 
@@ -353,14 +355,14 @@ COPY public.users (id, name, email) FROM stdin;
 -- Name: searches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lisalee
 --
 
-SELECT pg_catalog.setval('public.searches_id_seq', 103, true);
+SELECT pg_catalog.setval('public.searches_id_seq', 123, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lisalee
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 11, true);
+SELECT pg_catalog.setval('public.users_id_seq', 12, true);
 
 
 --

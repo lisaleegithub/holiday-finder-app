@@ -19,6 +19,8 @@
 
 # About
 <div align="center"> <img height="370" alt="landing-mobile" src="images/landing-mobile.png" href="https://techtonica-finalproject-lisa.herokuapp.com/"> &nbsp;&nbsp;&nbsp;&nbsp;<img height="370" alt="landing-web" src="images/landing-web.png" href="https://techtonica-finalproject-lisa.herokuapp.com/"></div>
+<br />
+<br />
 Holiday Finder is a web app that helps users to plan their holidays better by allowing them to discover if their travel dates align with their destination country’s holidays. You would be surprised how many different holidays there are around the world and some holidays are celebrated for days which means the place you are traveling to could be either extremely quiet and empty or festive and crowded.
 
 
@@ -26,6 +28,7 @@ Holiday Finder is a web app that helps users to plan their holidays better by al
 
 - Search holidays by country and date
 - Save and remove your searches
+<br />
 <div align="center"> <img height="400" alt="demo-mobile" src="images/demo-mobile.png" href="https://techtonica-finalproject-lisa.herokuapp.com/"> &nbsp;&nbsp;&nbsp;&nbsp;<img height="400" alt="demo-web" src="images/demo-web.png" href="https://techtonica-finalproject-lisa.herokuapp.com/"></div>
 
 ## Built With
