@@ -71,13 +71,13 @@ const TripForm = (props) => {
                     </div>
 
                     <div className="btn-group" style={{ width: "100%" }}>
-                        <button type="submit" className="submit-button btn btn-primary btn-sm"> Search Holidays </button>
+                        <button type="submit" className="submit-button btn btn-sm"> Search Holidays </button>
                     </div>
                 </div>
             </form >
 
             <div className="btn-group" style={{ width: "100%" }}>
-                <button onClick={handleOnClick} className="btn btn-primary btn-sm" style={{ width: "50%" }}>Save Trip</button><br></br>
+                <button onClick={handleOnClick} className="btn btn-sm" style={{ width: "50%" }}>Save Trip</button><br></br>
                 <button className="btn btn-primary btn-sm" style={{ width: "50%" }}><a href="#trip-list">Go to Saved Trips</a></button>
             </div>
         </div>
