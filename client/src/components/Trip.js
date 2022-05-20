@@ -91,12 +91,13 @@ const Trip = ({ user }) => {
             </div>
 
             <div id="trip-list">
-                <h2>🛫My List🛬</h2>
+                <h2 >🛫My List🛬</h2>
+                <p style={{fontStyle:"italic"}}>View holidays by clicking your saved trip</p>
 
                 <table className="trip-table">
                     <tr>
-                        <th>Saved Trips</th>
-                        <th>Delete</th>
+                        <th style={{fontWeight:"bold", fontSize:"1.2rem", textAlign:"left"}}>Saved Trips</th>
+                        <th style={{fontWeight:"bold", fontSize:"1.2rem", textAlign:"left"}}>Delete</th>
                     </tr>
 
                     {trips.map((trip, index) => (
@@ -106,7 +107,6 @@ const Trip = ({ user }) => {
                         </tr>
                     ))}
                 </table>
-
             </div>
         </div>
     )
