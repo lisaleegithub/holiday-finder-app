@@ -1,4 +1,3 @@
-import Slideshow from "../components/Slideshow";
 
 export default function About() {
     return (
@@ -19,7 +18,6 @@ export default function About() {
                     </p>
                 </div>
             </div>
-            <Slideshow/>
         </ div>
     );
 }
