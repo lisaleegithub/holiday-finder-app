@@ -63,10 +63,12 @@ const TripForm = (props) => {
 
                 <label htmlFor="traveldate">Travel Date:</label>
                 <input type="date" name="traveldate" value={trip.traveldate} onChange={handleTraveldateChange} className="form-control" required /><br></br>
-                <button type="submit" className="submit-button btn btn-primary btn-sm"> Search Holidays </button>
-                <button onClick={handleOnClick} className="btn btn-primary btn-sm">Save Trip</button><br></br>
+                <button type="submit" className="submit-button btn btn-primary btn-sm" style={{width:"100%"}}> Search Holidays </button>
             </form >
-            
+            <div className="btn-group" style={{width:"100%"}}>
+                <button onClick={handleOnClick} className="btn btn-primary btn-sm" style={{width:"50%"}}>Save Trip</button><br></br>
+                <button className="btn btn-primary btn-sm" style={{width:"50%"}}><a href="#trip-list">Go to My Saved Trips</a></button>
+            </div>
         </div>
     )
 

@@ -5,12 +5,12 @@ export default function Navigation() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
       <a className="navbar-brand nav-name" href="/" style={{color:"#F1EAE5"}}>HOLIDAY FINDER</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style={{backgroundColor:"#c4c4c4"}}>
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item active">
+        <ul className="navbar-nav" >
+          <li className="nav-item active" >
             <Link to="/">Home</Link>{" "}
           </li>
 
@@ -21,7 +21,6 @@ export default function Navigation() {
           <li className="nav-item">
             <Link to="/contact">Contact</Link>
           </li>
-
         </ul>
       </div>
     </nav>
