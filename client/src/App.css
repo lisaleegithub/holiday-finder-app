@@ -21,7 +21,7 @@ h3 {
   display: block;
 }
 
-.nav-name {
+.nav-name, .landing-content h1 {
   color: #F1EAE5;
   background-color: #F1EAE5;
   -webkit-background-clip: text;
@@ -96,20 +96,21 @@ li {
 
 /*
 */
-
-.page {
+#root {
   background-blend-mode: multiply;
   background-attachment: fixed;
   background-repeat: repeat;
   background-position: center center;
   background-size: cover;
-  height: 100vh;
   background-image: url("https://i.ytimg.com/vi/ztHPXKJgJUE/maxresdefault.jpg");
+}
+
+.page {
+  min-height: 100vh;
 }
 
 .landing-content {
   color: #F1EAE5;
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 150px;
@@ -120,7 +121,7 @@ li {
 }
 
 .line {
-  width: 150px;
+  width: 75%;
   height: 4px;
   background: #E19928;
   margin: 10px auto;

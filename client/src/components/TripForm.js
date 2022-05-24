@@ -46,10 +46,12 @@ const TripForm = (props) => {
         e.preventDefault();
         await postTrip(trip); // make the post request to the db
         setTrip(emptyTrip); // clear the fields
+        props.setHolidays(null);
+        props.setMessage("Trip Saved!");
+
     };
 
     return (
-        // <div className="container trip-form form-row">
         <div>
             <form onSubmit={props.getHolidays}>
                 <div class="row">
@@ -78,7 +80,7 @@ const TripForm = (props) => {
 
             <div className="btn-group" style={{ width: "100%" }}>
                 <button onClick={handleOnClick} className="btn btn-sm" style={{ width: "50%" }}>Save Trip</button><br></br>
-                <button className="btn btn-primary btn-sm" style={{ width: "50%" }}><a href="#trip-list">Go to Saved Trips</a></button>
+                <a href="#trip-list" className="btn btn-primary btn-sm" style={{ width: "50%" }}>Go to Saved Trips</a>
             </div>
         </div>
     )
