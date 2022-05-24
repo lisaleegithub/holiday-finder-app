@@ -25,6 +25,25 @@ app.use(cors());
 app.use(express.json());
 app.use(auth(config));
 
+// // create an endpoint for the route /api
+// app.get('/', (req, res) => {
+//     if (req.oidc && req.oidc.isAuthenticated()) {
+//         // select all users with the email address given
+//         db.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [req.oidc.user.email])
+//             .then(result => {
+//                 if (result.rowCount > 0) {
+//                     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+//                 } else {
+//                     db.query('INSERT INTO users (name, email) VALUES ($1, $2)', [req.oidc.user["given_name"], req.oidc.user.email])
+//                         .then(result => {
+//                             res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+//                         })
+//                 }
+//             })
+//     } else {
+//         res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+//     }
+// });
 // create an endpoint for the route /api
 app.get('/', (req, res) => {
     if (req.oidc && req.oidc.isAuthenticated()) {
@@ -32,17 +51,15 @@ app.get('/', (req, res) => {
         db.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [req.oidc.user.email])
             .then(result => {
                 if (result.rowCount > 0) {
-                    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+                    return Promise.resolve("success!!!!!");
                 } else {
-                    db.query('INSERT INTO users (name, email) VALUES ($1, $2)', [req.oidc.user["given_name"], req.oidc.user.email])
-                        .then(result => {
-                            res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
-                        })
+                    return db.query('INSERT INTO users (name, email) VALUES ($1, $2)', [req.oidc.user["given_name"], req.oidc.user.email])
                 }
             })
+            .then(() => res.sendFile(path.join(REACT_BUILD_DIR, 'index.html')))
     } else {
-        res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
-    }
+    res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+}
 });
 
 // create an endpoint for the route for the user authenticated
@@ -50,9 +67,9 @@ app.get('/', (req, res) => {
 app.get('/api/me', (req, res) => {
     if (req.oidc.isAuthenticated()) {
         db.query('SELECT * FROM users WHERE email = $1 LIMIT 1', [req.oidc.user.email])
-        .then(response => {
-            res.json(response.rows[0]);
-        })
+            .then(response => {
+                res.json(response.rows[0]);
+            })
     } else {
         res.status(401).json({ error: "Error in the auth0" });
     }
@@ -74,7 +91,7 @@ app.get('/api/:userid/trips', cors(), async (req, res) => {
 });
 
 // delete request
-app.delete('/api/trips/:tripid', cors(), async (req, res) =>{
+app.delete('/api/trips/:tripid', cors(), async (req, res) => {
     const tripid = req.params.tripid;
     await db.query('DELETE FROM trips WHERE id=$1', [tripid]);
     res.status(200).end();
@@ -105,34 +122,13 @@ app.get("/api/countries", cors(), async (req, res) => {
 
 // create the POST request
 app.post('/api/trips', cors(), async (req, res) => {
-    const {country, traveldate, userid} = req.body;
+    const { country, traveldate, userid } = req.body;
     const result = await db.query(
         'INSERT INTO trips(country, traveldate, userid) VALUES($1, $2, $3) RETURNING *',
         [country, traveldate, userid]
     );
     res.json(result.rows[0]);
 });
-
-// // Put request - Update request
-// app.put('/api/students/:studentId', cors(), async (req, res) =>{
-//     const studentId = req.params.studentId;
-//     const updateStudent = { id: req.body.id, firstname: req.body.firstname, lastname: req.body.lastname }
-//     //console.log(req.params);
-//     // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
-//     console.log(studentId);
-//     console.log(updateStudent);
-//     const query = `UPDATE students SET lastname=$1, firstname=$2 WHERE id = ${studentId} RETURNING *`;
-//     console.log(query);
-//     const values = [updateStudent.lastname, updateStudent.firstname];
-//     try{
-//         const updated = await db.query(query, values);
-//         console.log(updated.rows[0]);
-//         res.send(updated.rows[0]);
-//     } catch (e){
-//         console.log(e);
-//         return res.status(400).json({e});
-//     }
-// });
 
 // console.log that your server is up and running
 app.listen(PORT, () => {

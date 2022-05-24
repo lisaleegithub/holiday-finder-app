@@ -80,7 +80,7 @@ const Trip = ({ user }) => {
             <div className="trip-column">
                 <div>
                     <h2>🌏Let's Find Holidays🌏</h2>
-                    <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} user={user} />
+                    <TripForm onTripAdded={onTripAdded} getHolidays={getHolidays} setHolidays={setHolidays} setMessage={setMessage} user={user} />
                 </div>
                 <br />
                 <div className="long-line"></div>
@@ -96,14 +96,14 @@ const Trip = ({ user }) => {
 
                 <table className="trip-table">
                     <tr>
-                        <th style={{fontWeight:"bold", fontSize:"1.2rem", textAlign:"left"}}>Saved Trips</th>
-                        <th style={{fontWeight:"bold", fontSize:"1.2rem", textAlign:"left"}}>Delete</th>
+                        <th style={{fontWeight:"bold", fontSize:"1.5rem", textAlign:"left", textDecoration:"underline"}}>Saved Trips</th>
+                        <th style={{fontWeight:"bold", fontSize:"1.5rem", textAlign:"left", textDecoration:"underline"}}>Delete</th>
                     </tr>
 
                     {trips.map((trip, index) => (
                         <tr className="trip-list" key={index}>
-                            <td><button className="btn holiday-btn btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)}> {formatDate(trip.traveldate)} {trip.name} </button></td>
-                            <td><button className="btn delete-button btn-sm" onClick={() => { onDelete(trip) }}>✖</button></td>
+                            <td><button className="btn holiday-btn btn-sm" onClick={() => fetchHolidays(new Date(trip.traveldate), trip.country)} style={{fontSize:"1.2rem"}}> {formatDate(trip.traveldate)} {trip.name} </button></td>
+                            <td><button className="btn delete-button btn-sm" onClick={() => { onDelete(trip) }} style={{fontSize:"1.2rem"}}>✖</button></td>
                         </tr>
                     ))}
                 </table>
